@@ -13,17 +13,15 @@ export class PostsStore {
         makeAutoObservable(this)
     }
 
-    hydrate(serializedStore) {
+    hydratePosts(serializedStore) {
         this.posts = serializedStore.posts != null ? serializedStore.posts : []
     }
 }
 
 export async function fetchInitialPostsStoreState() {
-    const { data } = await API.getPosts();
-    return {
-        posts: data.splice(0, 20)
+    console.log( "getPosts")
+        const { data } = await API.getPosts();
+        return {
+            posts: data.splice(0, 20)
+        }
     }
-}
-
-
-// export default new PostsStore();

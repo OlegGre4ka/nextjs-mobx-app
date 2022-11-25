@@ -1,31 +1,31 @@
-
 import { useContext } from "react"
+import { useRouter } from "next/router"
 import PropTypes from 'prop-types'
 import { inject, observer, MobXProviderContext } from "mobx-react"
-// import Image from 'next/image';
 import styles from '../styles/Posts.module.scss'
-import MainLayout from "./../components/MainLayout"
+import MainLayout from "../components/MainLayout"
 
 // const Posts = inject("postsStore")(observer(({postsStore}) => {
 const Posts = observer(() => {
+  const { push } = useRouter();
   const { postsStore: { posts } } = useContext(MobXProviderContext);
-  console.log(posts, "posts in Home");
 
   return (
     <MainLayout>
-      <main className={styles.main}>
         <h5 className={styles.title}>
           Welcome to <a href="https://nextjs.org" target="_blank" rel="noopener noreferrer">Next.js!</a> with{" "}
           <a href="https://mobx.js.org/" target="_blank" rel="noopener noreferrer">MobX</a>,{" "}
           <a href="https://www.npmjs.com/package/axios" target="_blank" rel="noopener noreferrer">Axios</a>,<br />
           Prop-types and SCSS modules!
         </h5>
-        <div className={styles.grid}>
-          {posts.map(post => <p className={styles.card} key={post.id}>
-            <span>{post.id}.</span> <span>{post.title}</span>
-          </p>)}
+        <div className="grid">
+          {posts.map(post => <div className="card" key={post.id} onClick={() => push(`/posts/${post.id}`)}>
+            <div className="flex">
+              <span>{post.id}. </span><div className="card_title">{post.title}</div>
+            </div>
+          </div>
+          )}
         </div>
-      </main>
 
       {/* <footer className={styles.footer}>
         <a
