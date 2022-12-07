@@ -4,11 +4,16 @@ import { useRouter } from "next/router"
 import Image from 'next/legacy/image'
 import MainLayout from "../../components/MainLayout";
 import styles from "./../../styles/Photos.module.scss";
+import CircleProgressBar from "../../components/UI/CircleProgressBar"
 import PropTypes from 'prop-types'
 
 const Photos = observer(() => {
     const { push } = useRouter();
     const { photosStore: { photos } } = useContext(MobXProviderContext);
+
+    if (!photos) {
+        return <CircleProgressBar />
+      }
 
     return (
         <MainLayout>

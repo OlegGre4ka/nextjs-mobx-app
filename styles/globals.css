@@ -17,6 +17,11 @@ a {
 .flex{
   display: flex;
 }
+.flex-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .flex-direction-column {
   display: flex;
   justify-content: center;
